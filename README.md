@@ -1,2 +1,70 @@
-# docker-dhcpd
-Run ISC DHCP server in a docker container
+# docker-g10k
+A container running [ISC DHCP Server](https://www.isc.org/dhcp/).
+
+# Usage
+
+## docker
+
+```
+docker create \
+  --name=g10k \
+  -e TZ=Europe/London \
+  -i DHCP_IF=eth0 \
+  --net host \
+  --ports 69/udp \
+  --restart unless-stopped \
+  -v ./config:/config \
+  jchonig/dhcpd
+```
+
+### docker-compose
+
+Compatible with docker-compose v2 schemas.
+
+```
+---
+version: "2"
+services:
+  monit:
+    image: jchonig/dhcpd
+    container_name: dhcpd
+    environment:
+      - TZ=Europe/London
+	  - DHCP_IF=eth0
+    volumes:
+      - </path/to/appdata/config>:/config
+    expose:
+      - 69
+    restart: unless-stopped
+```
+
+# Parameters
+
+## Ports (--expose)
+
+| Port    | Function            |
+| ------  | --------            |
+| 69/udp  | DHCPD port          |
+| 647/tcp | DHCPD failover port |
+|         |                     |
+
+## Environment Variables (-e)
+
+| Env       | Function                                |
+| ---       | --------                                |
+| PUID=1000 | for UserID - see below for explanation  |
+| PGID=1000 | for GroupID - see below for explanation |
+| TZ=UTC    | Specify a timezone to use EG UTC        |
+| DHCP_IF=  | Default interfact for isc-dhcp-server   |
+|           |                                         |
+
+## Volume Mappings (-v)
+
+| Volume               | Function                                 |
+| ------               | --------                                 |
+| /config              | All the config files reside here         |
+
+# Application Setup
+
+  * Environment variables can also be passed in a file named `env` in
+    the `config` directory. This file is sourced by the shell.

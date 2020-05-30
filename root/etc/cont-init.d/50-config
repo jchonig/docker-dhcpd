@@ -1,0 +1,26 @@
+#!/usr/bin/with-contenv bash
+
+print_vars () {
+    if [ -n "${1}" ]; then
+	title=" ${1}"
+    else
+	title=""
+    fi
+    echo "Environment${title}:"
+    echo "    TZ=${TZ}"
+    echo "    DHCP_IF=${DHCP_IF}"
+}
+
+print_vars
+
+# make our config dirs
+mkdir -p /config
+
+# Overlay config directory
+cp -rpn /etc/dhcp /config
+test -e /config/dhcpd.leases || touch /config/dhcpd.leases
+
+chmod 664 /config/dhcpd.leases
+chown -R abc:abc \
+	/config/dhcpd.leases
+

@@ -1,4 +1,4 @@
-# docker-g10k
+# docker-dhcpd
 A container running [ISC DHCP Server](https://www.isc.org/dhcp/).
 
 # Usage
@@ -7,7 +7,7 @@ A container running [ISC DHCP Server](https://www.isc.org/dhcp/).
 
 ```
 docker create \
-  --name=g10k \
+  --name=dhcpd \
   -e TZ=Europe/London \
   -i DHCP_IF=eth0 \
   --net host \
@@ -33,7 +33,8 @@ services:
 	  - DHCP_IF=eth0
     volumes:
       - </path/to/appdata/config>:/config
-    expose:
+	network_mode: host
+    ports:
       - 69
     restart: unless-stopped
 ```

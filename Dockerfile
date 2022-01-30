@@ -1,4 +1,4 @@
-FROM lsiobase/ubuntu:latest
+FROM lsiobase/ubuntu:focal
 
 ARG DEBIAN_FRONTEND=noninteractive
 

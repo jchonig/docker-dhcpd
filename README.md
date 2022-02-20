@@ -51,13 +51,13 @@ services:
 
 ## Environment Variables (-e)
 
-| Env       | Function                                |
-| ---       | --------                                |
-| PUID=1000 | for UserID - see below for explanation  |
-| PGID=1000 | for GroupID - see below for explanation |
-| TZ=UTC    | Specify a timezone to use EG UTC        |
-| DHCP_IF=  | Default interfact for isc-dhcp-server   |
-|           |                                         |
+| Env       | Function                              |
+|-----------|---------------------------------------|
+| PUID=1000 | for UserID                            |
+| PGID=1000 | for GroupID                           |
+| TZ=UTC    | Specify a timezone to use, e.g. UTC   |
+| DHCP_IF=  | Default interface for isc-dhcp-server |
+|           |                                       |
 
 ## Volume Mappings (-v)
 

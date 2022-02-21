@@ -14,6 +14,7 @@ docker create \
   --ports 69/udp \
   --restart unless-stopped \
   -v ./config:/config \
+  -v ./data:/data \
   jchonig/dhcpd
 ```
 
@@ -33,10 +34,16 @@ services:
 	  - DHCP_IF=eth0
     volumes:
       - </path/to/appdata/config>:/config
+	  - dhcpd_data:/data
 	network_mode: host
     ports:
       - 69
     restart: unless-stopped
+
+...
+
+volumes:
+  dhcpd_data
 ```
 
 # Parameters
@@ -61,11 +68,15 @@ services:
 
 ## Volume Mappings (-v)
 
-| Volume               | Function                                 |
-| ------               | --------                                 |
-| /config              | All the config files reside here         |
+| Volume  | Function                                     |
+|---------|----------------------------------------------|
+| /config | All the config files reside here             |
+| /data   | Persistent volume containing the leases file |
+
 
 # Application Setup
 
   * Environment variables can also be passed in a file named `env` in
     the `config` directory. This file is sourced by the shell.
+  * /config will be monitored for changes.  Then these occur, the
+    dhcp-server daemon will be restarted.

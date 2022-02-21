@@ -18,9 +18,9 @@ mkdir -p /config
 
 # Overlay config directory
 cp -rpn /etc/dhcp /config
-test -e /config/dhcpd.leases || touch /config/dhcpd.leases
+test -e /data/dhcpd.leases || touch /data/dhcpd.leases
 
-chmod 664 /config/dhcpd.leases
+chmod 664 /data/dhcpd.leases
 chown -R abc:abc \
-	/config/dhcpd.leases
+	/data/dhcpd.leases
 

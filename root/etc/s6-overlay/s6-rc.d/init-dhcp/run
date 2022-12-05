@@ -11,7 +11,7 @@ print_vars () {
     echo "    DHCP_IF=${DHCP_IF}"
 }
 
-print_vars
+print_vars init-dhcp
 
 # make our config dirs
 mkdir -p /config

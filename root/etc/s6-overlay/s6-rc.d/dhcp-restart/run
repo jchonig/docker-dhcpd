@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bash
+
+while inotifywait -s -q -r /config -e attrib,modify,move,create,delete; do
+    sleep 5
+    echo "Stopping dhcpd"
+    s6-svc -d /run/service/dhcp
+    sleep 5
+    echo "Starting dhcpd"
+    s6-svc -u /run/service/dhcp
+done

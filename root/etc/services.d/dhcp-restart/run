@@ -1,9 +1,0 @@
-#!/usr/bin/with-contenv bash
-
-while inotifywait -s -q -r /config -e modify -e move -e create -e delete; do
-    # Sleep a couple seconds in case more than one file is updated
-    sleep 5
-    s6-svc -d /run/s6/services/isc-dhcp-server
-    sleep 5
-    s6-svc -u /run/s6/services/isc-dhcp-server
-done

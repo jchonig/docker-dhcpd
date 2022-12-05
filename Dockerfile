@@ -1,4 +1,4 @@
-FROM lsiobase/ubuntu:focal
+FROM lsiobase/ubuntu:jammy
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -9,10 +9,12 @@ ENV \
 # Set up
 RUN \
 echo "*** install utilities needed ****" && \
-	apt update && \
-        apt upgrade -y && \
-	apt -y install isc-dhcp-server \
+	apt-get update && \
+	apt-get -y install isc-dhcp-server \
                 inotify-tools && \
+	echo "**** clean up ****" && \
+	apt-get -y clean && \
+	apt-get -y autoremove && \
 	rm -rf /var/lib/apt/lists/*
 
 # Add configuration files

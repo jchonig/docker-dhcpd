@@ -1,4 +1,0 @@
-#!/bin/sh
-
-pkill -F /run/dhcpd.pid
-

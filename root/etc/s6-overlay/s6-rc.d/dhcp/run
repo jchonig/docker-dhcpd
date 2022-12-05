@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv bash
+
+# Drop privileges and run dhcpd
+exec dhcpd -user abc -group abc -d -f -4 -cf /config/dhcpd.conf -lf /data/dhcpd.leases -pf /run/dhcpd.pid ${DHCP_IF}
+
+
+

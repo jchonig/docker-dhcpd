@@ -53,18 +53,20 @@ volumes:
 | Port    | Function            |
 | ------  | --------            |
 | 69/udp  | DHCPD port          |
+| 547/udp | DHCPv6 port         |
 | 647/tcp | DHCPD failover port |
 |         |                     |
 
 ## Environment Variables (-e)
 
-| Env       | Function                              |
-|-----------|---------------------------------------|
-| PUID=1000 | for UserID                            |
-| PGID=1000 | for GroupID                           |
-| TZ=UTC    | Specify a timezone to use, e.g. UTC   |
-| DHCP_IF=  | Default interface for isc-dhcp-server |
-|           |                                       |
+| Env         | Function                              |
+|-------------|---------------------------------------|
+| PUID=1000   | for UserID                            |
+| PGID=1000   | for GroupID                           |
+| TZ=UTC      | Specify a timezone to use, e.g. UTC   |
+| DHCP_IF=    | Default interface for isc-dhcp-server |
+| DHCP_V6=    | Set to `true` to run DHCPv6 instead of DHCPv4 |
+|             |                                       |
 
 ## Volume Mappings (-v)
 

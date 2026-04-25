@@ -9,6 +9,7 @@ print_vars () {
     echo "Environment${title}:"
     echo "    TZ=${TZ}"
     echo "    DHCP_IF=${DHCP_IF}"
+    echo "    DHCP_V6=${DHCP_V6}"
 }
 
 print_vars init-dhcp
@@ -17,10 +18,16 @@ print_vars init-dhcp
 mkdir -p /config
 
 # Overlay config directory
-cp -rpn /etc/dhcp /config
-test -e /data/dhcpd.leases || touch /data/dhcpd.leases
-
-chmod 664 /data/dhcpd.leases
-chown -R abc:abc \
-	/data/dhcpd.leases
+mkdir -p /config/dhcp
+if [ "${DHCP_V6}" = "true" ]; then
+    cp -pn /etc/dhcp/dhcpd6.conf /config/dhcp/dhcpd6.conf
+    test -e /data/dhcpd6.leases || touch /data/dhcpd6.leases
+    chmod 664 /data/dhcpd6.leases
+    chown abc:abc /data/dhcpd6.leases
+else
+    cp -pn /etc/dhcp/dhcpd.conf /config/dhcp/dhcpd.conf
+    test -e /data/dhcpd.leases || touch /data/dhcpd.leases
+    chmod 664 /data/dhcpd.leases
+    chown abc:abc /data/dhcpd.leases
+fi
 

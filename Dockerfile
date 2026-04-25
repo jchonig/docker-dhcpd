@@ -4,6 +4,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 ENV \
         DHCPD_IF= \
+	DHCP_V6= \
 	TZ=UTC
 
 # Set up
@@ -22,6 +23,7 @@ COPY root /
 
 EXPOSE 69/udp
 EXPOSE 647/tcp
+EXPOSE 547/udp
 
 VOLUME [ "/config", "/data" ]
 

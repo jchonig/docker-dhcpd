@@ -1,7 +1,11 @@
 #!/usr/bin/with-contenv bash
 
 # Drop privileges and run dhcpd
-exec dhcpd -user abc -group abc -d -f -4 -cf /config/dhcpd.conf -lf /data/dhcpd.leases -pf /run/dhcpd.pid ${DHCP_IF}
+if [ "${DHCP_V6}" = "true" ]; then
+    exec dhcpd -user abc -group abc -d -f -6 -cf /config/dhcpd6.conf -lf /data/dhcpd6.leases -pf /run/dhcpd.pid ${DHCP_IF}
+else
+    exec dhcpd -user abc -group abc -d -f -4 -cf /config/dhcpd.conf -lf /data/dhcpd.leases -pf /run/dhcpd.pid ${DHCP_IF}
+fi
 
 
 

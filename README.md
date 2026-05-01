@@ -1,6 +1,8 @@
 # docker-dhcpd
 A container running [ISC DHCP Server](https://www.isc.org/dhcp/).
 
+Image hosted at: `ghcr.io/jchonig/dhcpd`
+
 # Usage
 
 ## docker
@@ -15,7 +17,7 @@ docker create \
   --restart unless-stopped \
   -v ./config:/config \
   -v ./data:/data \
-  jchonig/dhcpd
+  ghcr.io/jchonig/dhcpd
 ```
 
 ### docker-compose
@@ -27,7 +29,7 @@ Compatible with docker-compose v2 schemas.
 version: "2"
 services:
   monit:
-    image: jchonig/dhcpd
+    image: ghcr.io/jchonig/dhcpd
     container_name: dhcpd
     environment:
       - TZ=Europe/London
